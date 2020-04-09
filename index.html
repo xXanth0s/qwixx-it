@@ -190,13 +190,13 @@
 
         <div class="row justify-content-center pt-2 mb-3">
             <div class="col-4">
-                <div class="btn-group btn-group-toggle full-width-button-group" data-toggle="buttons">
-                    <button type="submit" id="Wuerfel_werfen" class="btn btn-primary btn-lg btn-block"
+                <div class="btn-group btn-group-toggle full-width-button-group">
+                    <button id="Wuerfel_werfen" class="btn btn-primary btn-lg btn-block"
                             title="Würfel werfen und neue zufällige Zahlen erhalten">
                         Würfel werfen
                     </button>
                     <button id="revert-button" class="btn btn-light btn-lg full-width-button "
-                            title="Wurf Rückgängig machen" disabled="disabled">
+                            title="Wurf Rückgängig machen" disabled>
                         <svg class="bi bi-arrow-counterclockwise" width="1em" height="1em" viewBox="0 0 16 16"
                              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -210,16 +210,16 @@
                 </div>
             </div>
         </div>
+        <div id="active-player-container">
+            <h4>Aktiver Spieler</h4>
+            <div id="active-player" class="mb-3"></div>
+        </div>
 
-        <h4>Aktiver Spieler</h4>
-        <div id="active-player"></div>
-
-
-        <div class="row justify-content-center pt-5">
+        <div class="row justify-content-center">
             <div class="col-4">
                 <button type="submit" id="reset-button" class="btn btn-secondary btn-lg btn-block"
                         title="klicke um das Spiel zurückzusetzen">
-                    Spiel löschen
+                    Spiel zurücksetzen
                 </button>
             </div>
         </div>

@@ -126,22 +126,24 @@ function Wuerfel_createPoints(value) {
 }
 
 async function Wuerfel_werfen(): Promise<void> {
-
     diceNumber++;
     const cubeData = getNewCubeData();
     oldCubeData.push(cubeData);
-    await drawCubes(cubeData);
     setActivePlayersName();
+    await drawCubes(cubeData);
     revertButton().disabled = false;
 }
 
 function revert() {
-
-    diceNumber--;
-    oldCubeData.pop();
-    revertButton().disabled = oldCubeData.length === 1;
-    drawCubes(oldCubeData[oldCubeData.length - 1]);
-    setActivePlayersName();
+    if (diceNumber > 0) {
+        diceNumber--;
+        oldCubeData.pop();
+        revertButton().disabled = oldCubeData.length === 1;
+        drawCubes(oldCubeData[oldCubeData.length - 1]);
+        setActivePlayersName();
+    } else {
+        revertButton().disabled = true
+    }
 }
 
 function drawCubes(cubeData: CubeData[]): Promise<void> {
@@ -286,8 +288,14 @@ const toggleCube = (element: HTMLDivElement) => {
 
 const setActivePlayersName = () => {
     const activePlayerElement: HTMLDivElement = document.getElementById('active-player') as HTMLDivElement;
+    const player = players[diceNumber % players.length];
 
-    activePlayerElement.innerText = players[diceNumber % players.length] || '';
+    if (player) {
+        $('#active-player-container').show();
+        activePlayerElement.innerText = player;
+    } else {
+        $('#active-player-container').hide();
+    }
 };
 
 const reset = () => {

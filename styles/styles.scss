@@ -280,3 +280,7 @@ a:hover {
     width: 100%;
   }
 }
+
+button:disabled {
+  cursor: default;
+}
