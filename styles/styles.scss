@@ -1,6 +1,6 @@
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -11,47 +11,47 @@
 
 body {
   line-height: 1;
-  overflow-y:scroll;
-  font-family:Arial,Helvetica,sans-serif;
-  font-size:16px;
+  overflow-y: scroll;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
 }
 
-strong{
-  text-decoration:underline;
-  font-size:18px;
+strong {
+  text-decoration: underline;
+  font-size: 18px;
 }
 
-#wrapper{
-  margin:0 auto;
-  text-align:center;
-  padding:2%;
+#wrapper {
+  margin: 0 auto;
+  text-align: center;
+  padding: 2%;
 }
 
-h1{
-  font-size:40px;
+h1 {
+  font-size: 40px;
 }
 
-h1 span{
-  font-size:20px;
+h1 span {
+  font-size: 20px;
 }
 
-h3{
-  font-size:16px;
+h3 {
+  font-size: 16px;
 }
 
-a{
-  color:black;
+a {
+  color: black;
 }
 
-a:hover{
+a:hover {
   text-decoration: none;
 }
 
-#Wuerfel_size_slider{
-  width:90%;
+#Wuerfel_size_slider {
+  width: 90%;
 }
 
-#W_minMaxAnzeige{
+#W_minMaxAnzeige {
 
   margin-top: 18px;
   margin-bottom: 10px;
@@ -59,206 +59,207 @@ a:hover{
   width: 100%;
 }
 
-#W_minMaxAnzeige a{
-  width:10%;
+#W_minMaxAnzeige a {
+  width: 10%;
   font-size: 22px;
   display: inline-block;
 }
 
-.Wuerfel_select{
+.Wuerfel_select {
   font-weight: bold;
-  margin-top:10px;
+  margin-top: 10px;
   padding: 5px;
 }
 
-#text{
+#text {
   line-height: 22px;
 }
 
-#text h2{
+#text h2 {
   margin-bottom: 20px;
   margin-top: 40px;
 }
 
-#text h3{
+#text h3 {
   margin-top: 40px;
 }
 
-#text a{
-  display:block;
+#text a {
+  display: block;
 }
 
-#Impressum_link{
+#Impressum_link {
   margin-top: 45px;
 }
 
-#Wuerfel_selectPageStyle{
+#Wuerfel_selectPageStyle {
   margin-left: 10px;
   margin-right: 10px;
 }
 
-#Wuerfel_wuerfelsWrap{
-  margin-top:10px;
+#Wuerfel_wuerfelsWrap {
+  margin-top: 10px;
 }
 
-#Wuerfel_wuerfelsWrap .Wuerfel_wuerfel{
+#Wuerfel_wuerfelsWrap .Wuerfel_wuerfel {
   width: 100px;
   height: 100px;
-  display:inline-block;
+  display: inline-block;
   border-color: #000000;
   border-style: solid;
   border-width: 3px;
   border-radius: 15px;
-  margin:15px;
+  margin: 15px;
   background-color: #e8e8e8;
 }
 
-#Wuerfel_wuerfelsWrap .Wuerfel_wuerfel span{
+#Wuerfel_wuerfelsWrap .Wuerfel_wuerfel span {
   line-height: 94px;
   font-size: 40px;
   font-weight: bold;
 
 }
 
-.Wuerfel_select{
+.Wuerfel_select {
   font-weight: bold;
   padding: 5px;
 }
 
-.Wuerfel_wuerfel table{
-  width:92%;
-  height:92%;
-  margin-top:4%;
-  margin-left:4%
+.Wuerfel_wuerfel table {
+  width: 92%;
+  height: 92%;
+  margin-top: 4%;
+  margin-left: 4%
 }
 
-.Wuerfel_wuerfel table tr{
-  width:100%;
-  height:33%;
+.Wuerfel_wuerfel table tr {
+  width: 100%;
+  height: 33%;
 }
 
-.Wuerfel_wuerfel table tr td{
-  width:33%;
-  height:33%;
+.Wuerfel_wuerfel table tr td {
+  width: 33%;
+  height: 33%;
 
 }
 
-.Wuerfel_wuerfel table div{
+.Wuerfel_wuerfel table div {
   background-color: #000000;
   display: inline-block;
-  width:15px;
-  height:15px;
+  width: 15px;
+  height: 15px;
   border-radius: 15px;
   z-index: 50;
 }
 
-#Wuerfel_Wuerfel_table_abstand{
-  height:3px;
+#Wuerfel_Wuerfel_table_abstand {
+  height: 3px;
 }
 
-#Impressum_wrapper{
-  margin:0 auto;
-  text-align:center;
-  padding:2%;
-  width:650px;
+#Impressum_wrapper {
+  margin: 0 auto;
+  text-align: center;
+  padding: 2%;
+  width: 650px;
   line-height: 22px;
 }
 
-#Impressum_wrapper table tr td{
+#Impressum_wrapper table tr td {
   text-align: left;
 }
 
-#Wuerfel_verlauf_fenster{
+#Wuerfel_verlauf_fenster {
   position: absolute;
-  left:3%;
-  top:20px;
-  width:94%;
+  left: 3%;
+  top: 20px;
+  width: 94%;
   display: none;
 }
 
-#Wuerfel_verlauf_fensterBack{
+#Wuerfel_verlauf_fensterBack {
   border-radius: 15px;
   background-color: #ffffff;
   border-style: solid;
   border-width: 2px;
   border-color: #444444;
-  padding:2%;
-  width:96%;
-  -webkit-box-shadow: 1px 4px 31px -4px rgba(0,0,0,0.75);
-  -moz-box-shadow: 1px 4px 31px -4px rgba(0,0,0,0.75);
-  box-shadow: 1px 4px 31px -4px rgba(0,0,0,0.75);
+  padding: 2%;
+  width: 96%;
+  -webkit-box-shadow: 1px 4px 31px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 4px 31px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 4px 31px -4px rgba(0, 0, 0, 0.75);
 }
 
-#Wuerfel_verlauf_fensterBack .inhalt{
+#Wuerfel_verlauf_fensterBack .inhalt {
   padding-bottom: 50px;
 }
 
-#Verluaf_schliessen_oben{
-  float:right;
+#Verluaf_schliessen_oben {
+  float: right;
   cursor: pointer;
 }
 
-#Verluaf_schliessen_unten{
-  float:right;
+#Verluaf_schliessen_unten {
+  float: right;
   cursor: pointer;
 }
 
-#Wuerfel_verlauf_fenster table{
-  width:100%;
-  border:0;
+#Wuerfel_verlauf_fenster table {
+  width: 100%;
+  border: 0;
 }
 
-#Wuerfel_verlauf_fenster td{
-  width:20%;
+#Wuerfel_verlauf_fenster td {
+  width: 20%;
 }
 
-#Wuerfel_verlauf_fenster td:first-of-type{
-  width:1%;
+#Wuerfel_verlauf_fenster td:first-of-type {
+  width: 1%;
   font-weight: bold;
 }
 
-#Wuerfel_verlauf_fenster .th{
+#Wuerfel_verlauf_fenster .th {
   background-color: #eeeeee;
 }
 
-.Wuerfel_verlaufWurf:hover{
-  opacity:0.85;
+.Wuerfel_verlaufWurf:hover {
+  opacity: 0.85;
   cursor: pointer;
 }
 
-.W_v_info{
-  display:none;
+.W_v_info {
+  display: none;
 }
 
-.W_v_info td{
-  padding-top:8px;
-  padding-bottom:8px;
+.W_v_info td {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
-#optimierteMobilVersion{
+#optimierteMobilVersion {
   font-size: 25px;
 }
 
-#Wuerfel_Wuerfel_ {
-  &0 {
-    background-color: red !important;
-    cursor: pointer;
-  }
-  &1 {
-    background-color: orange !important;
-    cursor: pointer;
-  }
-  &2 {
-    background-color: blue !important;
-    cursor: pointer;
-  }
-  &3 {
-    background-color: green !important;
-    cursor: pointer;
-  }
+.red {
+  background-color: red !important;
+  cursor: pointer;
 }
 
-.hidden{
+.orange {
+  background-color: orange !important;
+  cursor: pointer;
+}
+
+.blue {
+  background-color: blue !important;
+  cursor: pointer;
+}
+
+.green {
+  background-color: green !important;
+  cursor: pointer;
+}
+
+.hidden {
   opacity: 0;
   height: 0;
 }
@@ -270,4 +271,12 @@ a:hover{
 
 .hidden-cube {
   opacity: 0.2;
+}
+
+.full-width-button-group {
+  display: flex;
+
+  .btn-block {
+    width: 100%;
+  }
 }

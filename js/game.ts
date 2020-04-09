@@ -1,7 +1,9 @@
 import '../styles/styles.scss';
+import {CubeData} from './models/cube-data.model';
+import {Color} from './models/color.enum';
 
 
-$(document).ready(function () {
+$(() => {
     $(document).on('keydown', (event) => {
         if (event.keyCode == 32) {
             Wuerfel_werfen();
@@ -9,10 +11,15 @@ $(document).ready(function () {
     });
 
     $('#Wuerfel_werfen').on('click', () => {
-        diceNumber++;
         Wuerfel_werfen();
-        setActivePlayersName();
     });
+
+    revertButton().disabled = true;
+
+    revertButton().onclick = () => {
+        revert();
+    };
+
 
     $('#Wuerfel_size_slider').on('change', Wuerfel_size_change);
 
@@ -28,18 +35,21 @@ $(document).ready(function () {
     $('#game').hide();
 });
 
-var Wuerfel_pageStyle = 0;
-var Wuerfel_amount = 0;
-var Wuerfel_zero = 1;
-var Wuerfel_size = 100;
-var Wuerfel_font_size = "40px";
-var Wuerfel_point_size = "15px";
-var Wuerfel_anzahlWuerfe = 6;
-var Wuerfel_block = false;
-var Wuerfel_alleine_werfen_block = [];
-var Wuerfel_ersterWurf = true;
-var players = [];
-var diceNumber = 0;
+let Wuerfel_size = 100;
+let Wuerfel_font_size = "40px";
+let Wuerfel_point_size = "15px";
+let players = [];
+let diceNumber = 0;
+let oldCubeData: CubeData[][] = [];
+
+const colorOrder = [
+    Color.RED,
+    Color.ORANGE,
+    Color.BLUE,
+    Color.GREEN,
+    Color.WHITE,
+    Color.WHITE,
+];
 
 const cubeDisabledClass = 'hidden-cube';
 
@@ -115,63 +125,38 @@ function Wuerfel_createPoints(value) {
     return Wuerfel_Wuerfel_table;
 }
 
-function Wuerfel_werfen() {
-    $('#Wuerfel_verlauf_fenster').fadeOut(0);
+async function Wuerfel_werfen(): Promise<void> {
 
-    if (!Wuerfel_block) {
-        Wuerfel_block = true;
+    diceNumber++;
+    const cubeData = getNewCubeData();
+    oldCubeData.push(cubeData);
+    await drawCubes(cubeData);
+    setActivePlayersName();
+    revertButton().disabled = false;
+}
 
-        Wuerfel_pageStyle = +($('#Wuerfel_selectPageStyle').first().val());
-        Wuerfel_amount = 6;
+function revert() {
 
-        if (Wuerfel_anzahlWuerfe == 0) {
-            Wuerfel_amount = 4;
-            $('#Wuerfel_selectAmount').first().val(4);
-            Wuerfel_pageStyle = 6;
-            $('#Wuerfel_selectPageStyle').first().val(6);
-        }
+    diceNumber--;
+    oldCubeData.pop();
+    revertButton().disabled = oldCubeData.length === 1;
+    drawCubes(oldCubeData[oldCubeData.length - 1]);
+    setActivePlayersName();
+}
 
-        if ($('#Wuerfel_selectZero').first().val() == "true") {
-            Wuerfel_zero = 0;
-        }
-        if ($('#Wuerfel_selectZero').first().val() == "false") {
-            Wuerfel_zero = 1;
-        }
+function drawCubes(cubeData: CubeData[]): Promise<void> {
+    var Wuerfel_wuerfelsWrap = document.getElementById('Wuerfel_wuerfelsWrap');
 
-        const randomNumbers = getRandomNumbers();
-        var Wuerfel_wuerfelsWrap = document.getElementById('Wuerfel_wuerfelsWrap');
+    var Wuerfel_wuerfelsInternWrap = document.createElement('div');
+    Wuerfel_wuerfelsInternWrap.id = "Wuerfel_wuerfelsInternWrap";
 
-        var Wuerfel_wuerfelsInternWrap = document.createElement('div');
-        Wuerfel_wuerfelsInternWrap.id = "Wuerfel_wuerfelsInternWrap";
+    for (let i = 0; i < cubeData.length; i++) {
+        const cubeElement = createCubeElement(cubeData[i], i);
+        Wuerfel_wuerfelsInternWrap.appendChild(cubeElement);
+    }
 
-        for (let i = 0; i < Wuerfel_amount; i++) {
-            const isDisabled = isCubeDisabled(i);
-            const Wuerfel_wuerfel = document.createElement('div');
-
-            Wuerfel_wuerfel.classList.add('Wuerfel_wuerfel');
-            if(isDisabled) {
-                Wuerfel_wuerfel.classList.add(cubeDisabledClass);
-            }
-
-            Wuerfel_wuerfel.id = 'Wuerfel_Wuerfel_' + i;
-            if(i < 4) {
-                Wuerfel_wuerfel.title = "Klicke um den Würfel zu disablen/enablen";
-            }
-
-            var Wuerfel_Wuerfel_p = document.createElement('span');
-            Wuerfel_Wuerfel_p.innerHTML = "" + randomNumbers[i];
-
-            var Wuerfel_Wuerfel_table_abstand = document.createElement('div');
-            Wuerfel_Wuerfel_table_abstand.id = "Wuerfel_Wuerfel_table_abstand";
-
-            Wuerfel_wuerfel.appendChild(Wuerfel_Wuerfel_table_abstand);
-            Wuerfel_wuerfel.appendChild(Wuerfel_createPoints(randomNumbers[i]));
-            $(Wuerfel_wuerfel).on('click', () => toggleCube(i));
-
-            Wuerfel_wuerfelsInternWrap.appendChild(Wuerfel_wuerfel);
-        }
-
-        disableButton();
+    disableButton();
+    return new Promise<void>(resolve => {
         jQuery('#Wuerfel_wuerfelsWrap').animate({
             opacity: 0
         }, 400, function () {
@@ -182,11 +167,42 @@ function Wuerfel_werfen() {
             jQuery('#Wuerfel_wuerfelsWrap').animate({
                 opacity: 1
             }, 800, function () {
-                Wuerfel_block = false;
                 enableButton();
+                resolve();
             });
         });
+    })
+}
+
+function createCubeElement(cubeData: CubeData, index: number): HTMLDivElement {
+
+    const id = `Wuerfel_Wuerfel_${index}`;
+    const isDisabled = isCubeDisabled(index);
+
+    const wuerfelElement = document.createElement('div');
+
+    wuerfelElement.id = id;
+
+    wuerfelElement.classList.add('Wuerfel_wuerfel');
+    wuerfelElement.classList.add(cubeData.color);
+    if (isDisabled) {
+        wuerfelElement.classList.add(cubeDisabledClass);
     }
+
+    if (cubeData.color !== Color.WHITE) {
+        wuerfelElement.title = "Klicke um den Würfel zu disablen/enablen";
+    }
+
+    var Wuerfel_Wuerfel_p = document.createElement('span');
+    Wuerfel_Wuerfel_p.innerHTML = "" + cubeData.value;
+
+    var Wuerfel_Wuerfel_table_abstand = document.createElement('div');
+    Wuerfel_Wuerfel_table_abstand.id = "Wuerfel_Wuerfel_table_abstand";
+
+    wuerfelElement.appendChild(Wuerfel_Wuerfel_table_abstand);
+    wuerfelElement.appendChild(Wuerfel_createPoints(cubeData.value));
+    $(wuerfelElement).on('click', () => toggleCube(wuerfelElement));
+    return wuerfelElement;
 }
 
 function Wuerfel_size_change() {
@@ -210,14 +226,15 @@ function Wuerfel_size_change() {
     jQuery('.Wuerfel_wuerfel table div').css('border-radius', Wuerfel_point_size);
 }
 
-const getRandomNumbers = (): number[] => {
-    const result = [];
-    for (let i = 0; i < Wuerfel_anzahlWuerfe; i++) {
+const getNewCubeData = (): CubeData[] => {
+    return colorOrder.map(color => {
         const randomNumber = Math.ceil(Math.random() * 6);
-        result.push(randomNumber)
-    }
-    return result
-}
+        return {
+            color: color,
+            value: randomNumber
+        }
+    });
+};
 
 
 const addPlayerInput = () => {
@@ -258,21 +275,19 @@ const startGame = () => {
     setActivePlayersName();
 };
 
-const toggleCube = (index: number) => {
-    if (index < 4) {
-        const cube = $(`#Wuerfel_Wuerfel_${index}`);
-        if (isCubeDisabled(index)) {
-            cube.removeClass(cubeDisabledClass)
-        } else {
-            cube.addClass(cubeDisabledClass)
-
-        }
+const toggleCube = (element: HTMLDivElement) => {
+    if (element.classList.contains(cubeDisabledClass)) {
+        element.classList.remove(cubeDisabledClass)
+    } else {
+        element.classList.add(cubeDisabledClass)
     }
 };
 
+
 const setActivePlayersName = () => {
     const activePlayerElement: HTMLDivElement = document.getElementById('active-player') as HTMLDivElement;
-    activePlayerElement.innerText = players[diceNumber % players.length]
+
+    activePlayerElement.innerText = players[diceNumber % players.length] || '';
 };
 
 const reset = () => {
@@ -295,4 +310,8 @@ const enableButton = () => {
 const isCubeDisabled = (cubeIndex: number): boolean => {
     const cube = $(`#Wuerfel_Wuerfel_${cubeIndex}`);
     return cube.hasClass(cubeDisabledClass)
+}
+
+const revertButton = (): HTMLButtonElement => {
+    return document.getElementById('revert-button') as HTMLButtonElement;
 }
