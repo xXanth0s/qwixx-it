@@ -1,0 +1,33 @@
+{
+  "name": "quixx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/game.js",
+  "scripts": {
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:dev": "webpack --watch --config webpack.dev.js",
+    "server": "http-server ./dist -p 9000"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^3.4.2",
+    "fork-ts-checker-webpack-plugin": "^4.1.1",
+    "jquery": "^3.4.1",
+    "node-sass": "^4.13.1",
+    "path": "^0.12.7",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.3",
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.3.33",
+    "webpack-cli": "^3.3.11"
+  }
+}

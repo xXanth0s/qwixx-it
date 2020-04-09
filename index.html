@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html lang="de">
+<head>
+  <base href="/game/"/>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="content-language" content="de">
+  <title>Qwixx online</title>
+  <meta name="author" content="Oliver Latz"/>
+  <meta name="description"
+        content="Qwixx oline spielen"/>
+  <meta property="og:title" content="qwixx-online.de Qwixx online spielen"/>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
+  <script type="text/javascript" src="game.js"></script>
+</head>
+<body>
+
+<div id="wrapper">
+  <h1 title="virtueller online Computer Spielwürfel">Online Qwixx</h1>
+  <div id="players-input">
+    <h2 class="pb-3">Spieler:</h2>
+    <div class="players-input">
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <button type="button" class="btn secondary btn-lg btn-block" id="new-player">Weiteren Spieler hinzufügen
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center pt-2">
+      <div class="col-4">
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="start-game">Spiel starten</button>
+      </div>
+    </div>
+  </div>
+  <div id="game">
+    <div id="W_minMaxAnzeige">
+      <a class="btn btn-navbar" id="W_min" title="niedrigster Wert"></a>
+      <a class="btn btn-navbar" id="W_d" title="Durchschnitt"></a>
+      <a class="btn btn-navbar" id="W_max" title="höchster Wert"></a>
+      <a class="btn btn-navbar" id="W_sum" title="Summe"></a>
+    </div>
+
+    <div class="Wuerfel_size_slider_container">
+      <input type="range" min="80" max="800" value="250" class="slider" id="Wuerfel_size_slider"
+             title="Würfel Größe einstellen">
+    </div>
+
+    <div id="Wuerfel_wuerfelsWrap">
+      <div id="Wuerfel_wuerfelsInternWrap">
+        <div class="Wuerfel_wuerfel" id="Wuerfel_Wuerfel_1" title="Klicke um ihn zu disablen/enablen" style="width: 150px; height: 150px; opacity: 1;">
+          <div id="Wuerfel_Wuerfel_table_abstand"></div>
+          <table>
+            <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="Wuerfel_wuerfel" id="Wuerfel_Wuerfel_2" title="Klicke um ihn zu disablen/enablen" style="width: 150px; height: 150px; opacity: 1;">
+          <div id="Wuerfel_Wuerfel_table_abstand"></div>
+          <table>
+            <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="Wuerfel_wuerfel" id="Wuerfel_Wuerfel_3" title="Klicke um ihn zu disablen/enablen" style="width: 150px; height: 150px; opacity: 1;">
+          <div id="Wuerfel_Wuerfel_table_abstand"></div>
+          <table>
+            <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="Wuerfel_wuerfel" id="Wuerfel_Wuerfel_4" title="Klicke um ihn zu disablen/enablen" style="width: 150px; height: 150px; opacity: 1;">
+          <div id="Wuerfel_Wuerfel_table_abstand"></div>
+          <table>
+            <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="Wuerfel_wuerfel" id="Wuerfel_Wuerfel_5" style="width: 150px; height: 150px; opacity: 1;">
+          <div id="Wuerfel_Wuerfel_table_abstand"></div>
+          <table>
+            <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="Wuerfel_wuerfel" id="Wuerfel_Wuerfel_6" style="width: 150px; height: 150px; opacity: 1;">
+          <div id="Wuerfel_Wuerfel_table_abstand"></div>
+          <table>
+            <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center pt-2 mb-3">
+      <div class="col-4">
+        <button type="submit" id="Wuerfel_werfen" class="btn btn-primary btn-lg btn-block"
+                title="klicke um alle Würfel auf einmal zu werfen">
+          Würfel werfen
+        </button>
+      </div>
+    </div>
+
+    <h4>Aktiver Spieler</h4>
+    <div id="active-player"></div>
+
+
+
+
+    <div class="row justify-content-center pt-5">
+      <div class="col-4">
+        <button type="submit" id="reset-button" class="btn btn-secondary btn-lg btn-block"
+                title="klicke um das Spiel zurückzusetzen">
+          Neustart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
