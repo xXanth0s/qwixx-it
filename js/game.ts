@@ -1,4 +1,3 @@
-import '../styles/styles.scss';
 import {CubeData} from './models/cube-data.model';
 import {Color} from './models/color.enum';
 

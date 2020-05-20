@@ -7,12 +7,15 @@ module.exports = {
 
 
   entry: {
-    game: './js/game.ts',
+    game: [
+        './styles/styles.scss',
+        './js/game.ts'
+    ]
 
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist/game'),
+    path: path.resolve(__dirname, 'dist'),
   },
 
   resolve: {
@@ -51,6 +54,7 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin(),
     new CopyPlugin([
       {from: 'index.html', to: 'index.html'},
+      {from: 'CNAME', to: 'CNAME', toType: 'file'},
     ]),
 
     new webpack.ProvidePlugin({
